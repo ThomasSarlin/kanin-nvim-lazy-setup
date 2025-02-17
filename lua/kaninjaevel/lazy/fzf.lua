@@ -3,7 +3,7 @@ return {
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-        require("fzf-lua").setup({})
+        require("fzf-lua").setup({'default'})
         local builtin = require('fzf-lua')
         vim.keymap.set('n', '<leader>pt', builtin.files, {})
         vim.keymap.set('n', '<leader>t', builtin.git_files, {})
