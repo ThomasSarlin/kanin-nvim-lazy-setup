@@ -63,7 +63,7 @@ return {
                 "rust_analyzer",
                 "gopls",
                 "ruby_lsp",
-                "rubocop",
+                "rubocop"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -72,21 +72,12 @@ return {
                         capabilities = capabilities
                     }
                 end,
-
-                ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
-                        capabilities = capabilities,
-                        settings = {
-                            Lua = {
-				    runtime = { version = "Lua 5.1" },
-                                diagnostics = {
-                                    globals = { "vim", "it", "describe", "before_each", "after_each" },
-                                }
-                            }
-                        }
-                    }
-                end,
+                ["ruby_lsp"] = function()
+                  require('lspconfig').ruby_lsp.setup {
+                    capabilities = capabilities,
+                    cmd_env = { BUNDLE_GEMFILE = vim.fn.getenv('GLOBAL_GEMFILE') },
+                  }
+                end
             }
         })
 
