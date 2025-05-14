@@ -63,7 +63,6 @@ return {
                 "rust_analyzer",
                 "gopls",
                 "ruby_lsp",
-                "rubocop"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
