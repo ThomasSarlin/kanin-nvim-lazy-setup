@@ -74,7 +74,28 @@ return {
                 ["ruby_lsp"] = function()
                   require('lspconfig').ruby_lsp.setup {
                     capabilities = capabilities,
-                    cmd_env = { BUNDLE_GEMFILE = vim.fn.getenv('GLOBAL_GEMFILE') },
+                    cmd = { vim.fn.expand('~/.rbenv/shims/ruby-lsp') },
+                    cmd_env = { 
+                      BUNDLE_GEMFILE = vim.fn.getenv('GLOBAL_GEMFILE'),
+                      PATH = vim.fn.expand('~/.rbenv/shims') .. ':' .. vim.env.PATH
+                    },
+                    init_options = {
+                      enabledFeatures = {
+                        "diagnostics",
+                        "formatting",
+                        "onTypeFormatting",
+                        "folding",
+                        "selectionRanges",
+                        "semanticHighlighting"
+                      },
+                      featuresConfiguration = {
+                        inlayHint = {
+                          implicitHashValue = true,
+                          implicitRescue = true
+                        }
+                      },
+                      linters = { "rubocop" }
+                    }
                   }
                 end
             }
@@ -102,7 +123,11 @@ return {
         })
 
         vim.diagnostic.config({
-            -- update_in_insert = true,
+            virtual_text = true,
+            signs = true,
+            underline = true,
+            update_in_insert = false,
+            severity_sort = true,
             float = {
                 focusable = false,
                 style = "minimal",

@@ -24,3 +24,4 @@ vim.opt.autoindent = true
 
 
 vim.opt.showmatch = true
+vim.opt.cmdheight = 2
