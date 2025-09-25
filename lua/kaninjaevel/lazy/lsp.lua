@@ -86,7 +86,11 @@ return {
                         "onTypeFormatting",
                         "folding",
                         "selectionRanges",
-                        "semanticHighlighting"
+                        "semanticHighlighting",
+                        "definition",
+                        "references",
+                        "hover",
+                        "completion"
                       },
                       featuresConfiguration = {
                         inlayHint = {
