@@ -4,7 +4,6 @@ require("kaninjaevel.set")
 require("kaninjaevel.lazy_init")
 
 
-
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 

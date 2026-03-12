@@ -46,10 +46,6 @@ return {
                   require('lspconfig').ruby_lsp.setup {
                     capabilities = capabilities,
                     cmd = { vim.fn.expand('~/.rbenv/shims/ruby-lsp') },
-                    cmd_env = { 
-                      BUNDLE_GEMFILE = vim.fn.getenv('GLOBAL_GEMFILE'),
-                      PATH = vim.fn.expand('~/.rbenv/shims') .. ':' .. vim.env.PATH
-                    },
                     init_options = {
                       enabledFeatures = {
                         "diagnostics",
@@ -87,7 +83,7 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-                ['<Enter>'] = cmp.mapping.confirm({ select = true })
+                ['<Enter>'] = cmp.mapping.confirm({ select = false })
             }),
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
