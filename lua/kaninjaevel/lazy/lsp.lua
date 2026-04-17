@@ -72,6 +72,10 @@ return {
             }
         })
 
+        require("lspconfig").crystalline.setup({
+            capabilities = capabilities,
+        })
+
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
