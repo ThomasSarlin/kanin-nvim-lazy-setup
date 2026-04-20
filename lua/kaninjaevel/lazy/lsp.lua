@@ -28,6 +28,36 @@ return {
         end, { desc = "[conform] format" })
         require("fidget").setup({})
         require("mason").setup()
+
+        vim.lsp.config("*", {
+            capabilities = capabilities,
+        })
+
+        vim.lsp.config("ruby_lsp", {
+            cmd = { vim.fn.expand("~/.rbenv/shims/ruby-lsp") },
+            init_options = {
+                enabledFeatures = {
+                    "diagnostics",
+                    "formatting",
+                    "onTypeFormatting",
+                    "folding",
+                    "selectionRanges",
+                    "semanticHighlighting",
+                    "definition",
+                    "references",
+                    "hover",
+                    "completion",
+                },
+                featuresConfiguration = {
+                    inlayHint = {
+                        implicitHashValue = true,
+                        implicitRescue = true,
+                    },
+                },
+                linters = { "rubocop" },
+            },
+        })
+
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "lua_ls",
@@ -35,46 +65,10 @@ return {
                 "gopls",
                 "ruby_lsp",
             },
-            handlers = {
-                function(server_name) -- default handler (optional)
-
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
-                    }
-                end,
-                ["ruby_lsp"] = function()
-                  require('lspconfig').ruby_lsp.setup {
-                    capabilities = capabilities,
-                    cmd = { vim.fn.expand('~/.rbenv/shims/ruby-lsp') },
-                    init_options = {
-                      enabledFeatures = {
-                        "diagnostics",
-                        "formatting",
-                        "onTypeFormatting",
-                        "folding",
-                        "selectionRanges",
-                        "semanticHighlighting",
-                        "definition",
-                        "references",
-                        "hover",
-                        "completion"
-                      },
-                      featuresConfiguration = {
-                        inlayHint = {
-                          implicitHashValue = true,
-                          implicitRescue = true
-                        }
-                      },
-                      linters = { "rubocop" }
-                    }
-                  }
-                end
-            }
+            automatic_enable = true,
         })
 
-        require("lspconfig").crystalline.setup({
-            capabilities = capabilities,
-        })
+        vim.lsp.enable("crystalline")
 
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
